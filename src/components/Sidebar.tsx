@@ -8,10 +8,14 @@ import {
   Plus,
   Instagram,
   Facebook,
-  Twitter
+  Twitter,
+  LogOut,
+  User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SidebarProps {
   activeTab: string;
@@ -34,6 +38,8 @@ const connectedAccounts = [
 ];
 
 export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
+  const { user, signOut } = useAuth();
+  
   return (
     <div className="w-64 bg-card border-r border-border h-screen flex flex-col">
       <div className="p-6">
@@ -41,6 +47,33 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           FlowCrest
         </h1>
         <p className="text-muted-foreground text-sm">Automation Platform</p>
+      </div>
+
+      {/* User Profile Section */}
+      <div className="px-4 pb-4">
+        <div className="flex items-center gap-3 p-3 rounded-lg bg-accent/50">
+          <Avatar className="h-8 w-8">
+            <AvatarFallback>
+              <User className="h-4 w-4" />
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium truncate">
+              {user?.email || 'User'}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Premium Plan
+            </p>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={signOut}
+            className="h-8 w-8 p-0"
+          >
+            <LogOut className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
 
       <nav className="flex-1 px-4 space-y-2">
