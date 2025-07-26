@@ -38,7 +38,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
     <div className="w-64 bg-card border-r border-border h-screen flex flex-col">
       <div className="p-6">
         <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-          SocialFlow
+          FlowCrest
         </h1>
         <p className="text-muted-foreground text-sm">Automation Platform</p>
       </div>
