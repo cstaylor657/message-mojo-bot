@@ -54,7 +54,7 @@ export const useConnectedAccounts = () => {
         throw new Error('No valid session');
       }
 
-      const response = await supabase.functions.invoke('oauth-facebook', {
+      const response = await supabase.functions.invoke('oauth-facebook?action=connect', {
         body: {},
         headers: {
           'Authorization': `Bearer ${session.access_token}`,
@@ -81,7 +81,7 @@ export const useConnectedAccounts = () => {
         throw new Error('No valid session');
       }
 
-      const response = await supabase.functions.invoke('oauth-facebook', {
+      const response = await supabase.functions.invoke('oauth-facebook?action=callback', {
         body: { code, state },
         headers: {
           'Authorization': `Bearer ${session.access_token}`,
@@ -116,7 +116,7 @@ export const useConnectedAccounts = () => {
         throw new Error('No valid session');
       }
 
-      const response = await supabase.functions.invoke('oauth-facebook', {
+      const response = await supabase.functions.invoke('oauth-facebook?action=disconnect', {
         body: { platform, accountId },
         headers: {
           'Authorization': `Bearer ${session.access_token}`,
