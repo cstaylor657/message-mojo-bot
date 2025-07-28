@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      connected_accounts: {
+        Row: {
+          access_token: string
+          account_data: Json | null
+          created_at: string
+          id: string
+          is_active: boolean
+          platform: string
+          platform_user_id: string
+          platform_username: string | null
+          refresh_token: string | null
+          token_expires_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          account_data?: Json | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          platform: string
+          platform_user_id: string
+          platform_username?: string | null
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          account_data?: Json | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          platform?: string
+          platform_user_id?: string
+          platform_username?: string | null
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "connected_accounts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
