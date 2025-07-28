@@ -5,10 +5,6 @@ import {
   MessageSquare, 
   BarChart3, 
   Settings,
-  Plus,
-  Instagram,
-  Facebook,
-  Twitter,
   LogOut,
   User
 } from "lucide-react";
@@ -16,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
+import { ConnectedAccountsManager } from "./ConnectedAccountsManager";
 
 interface SidebarProps {
   activeTab: string;
@@ -31,11 +28,6 @@ const navigation = [
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
-const connectedAccounts = [
-  { platform: "Instagram", icon: Instagram, connected: true },
-  { platform: "Facebook", icon: Facebook, connected: true },
-  { platform: "Twitter", icon: Twitter, connected: false },
-];
 
 export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   const { user, signOut } = useAuth();
@@ -100,31 +92,8 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
       <div className="p-4 border-t border-border">
         <div className="mb-3">
           <h3 className="text-sm font-medium mb-2">Connected Accounts</h3>
-          <div className="space-y-2">
-            {connectedAccounts.map((account) => {
-              const Icon = account.icon;
-              return (
-                <div
-                  key={account.platform}
-                  className="flex items-center gap-2 text-sm"
-                >
-                  <Icon className="h-4 w-4" />
-                  <span className="flex-1">{account.platform}</span>
-                  <div
-                    className={cn(
-                      "h-2 w-2 rounded-full",
-                      account.connected ? "bg-success" : "bg-muted"
-                    )}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          <ConnectedAccountsManager compact />
         </div>
-        <Button variant="outline" size="sm" className="w-full">
-          <Plus className="h-4 w-4" />
-          Add Account
-        </Button>
       </div>
     </div>
   );
